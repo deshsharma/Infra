@@ -1,0 +1,7 @@
+FROM alpine
+
+CMD ["ls" , "-l"]
+#docker build -t dockercmd -f DockerfileCmd .
+#docker run dockercmd
+#docker run dockercmd ls var
+#docker run -it dockercmd  /bin/sh

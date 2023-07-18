@@ -1,0 +1,6 @@
+FROM alpine
+ENTRYPOINT [ "ls" ]
+#docker build -t dockerep -f DockerfileEntryPoint .
+#docker run dockerep
+#docker run dockerep ls var
+#docker run -it --entrypoint /bin/sh dockerep

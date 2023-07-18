@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hello-volume
+spec:
+  containers:  
+  - image: alpine
+    name: hello-volume
+    command: ["sh", "-c", "while true; do echo 'Hello, World!'; sleep 1; done"]
+    securityContext:
+      privileged: true
+    volumeMounts:
+    - mountPath: /host_directory
+      name: test-volume
+  volumes:
+  - name: test-volume
+    hostPath:
+      # directory location on host
+      path: /tmp
+      # this field is optional
+      type: Directory

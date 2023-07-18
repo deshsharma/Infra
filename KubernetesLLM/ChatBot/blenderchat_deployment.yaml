@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: blenderbot-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: blenderbot
+  template:
+    metadata:
+      labels:
+        app: blenderbot
+    spec:
+      containers:
+      - name: blenderbot-container
+        image: blenderbot:latest
+        imagePullPolicy: Never
+        env:
+        - name: MONGODB_USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: username
+        - name: MONGODB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mongodb-secret
+              key: password
+        volumeMounts:
+        - name: huggingface-cache
+          mountPath: /root/.cache/huggingface
+        ports:
+        - containerPort: 8501  
+      volumes:
+      - name: huggingface-cache
+        hostPath:
+          path: /tmp/huggingface
+          type: Directory
