@@ -52,7 +52,7 @@ collection = db["history"]
 # Streamlit app
 def main():
     # Set page title
-    st.title("Blenderbot Chatbot")
+    st.title("Kubernetes Blenderbot Chatbot")
     
     # User input
     user_input = st.text_input("Enter your question:")

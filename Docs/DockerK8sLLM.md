@@ -32,7 +32,7 @@ A monolithic program runs on a single server, like a big house where everything 
 
 **Microservices**
 
-Old, large applications are now being divided into smaller parts called microservices. These microservices can work independently, making it easier to develop, deploy, update, and scale them as needed. This flexibility allows businesses to quickly adapt to changing requirements by making changes to specific components without affecting the entire system.
+Old, large applications are now being divided into smaller parts called microservices. These microservices can work independently, making it easier to develop, **deploy, update, and scale** them as needed. This flexibility allows businesses to quickly adapt to changing requirements by making changes to specific components without affecting the entire system.
 
 We got the microservices, what next how to and where to deploy?
 
@@ -66,7 +66,9 @@ Each component can be independently scaled based on demand, ensuring efficient r
 
 This microservices deployment allows for independent scaling and management of each application component, providing flexibility and efficient resource allocation for the web application, business application, and data storage.
 
-As the components become smaller and more numerous, assigning each one its own virtual machine (VM) becomes impractical. Doing so would waste hardware resources and increase hardware expenses. Moreover, managing and configuring each VM individually would also impose a significant workload on system administrators, resulting in the inefficient use of human resources.
+**Container**
+
+Things are going well, but now consider that the components have become **smaller and more numerous**. Assigning each one its own virtual machine (VM) has become impractical. Doing so would waste hardware resources and increase hardware expenses. Moreover, managing and configuring each VM individually would also impose a significant workload on system administrators, resulting in the inefficient use of human resources.
 
 When faced with the challenges of managing numerous components without squandering hardware and human resources, people often turn to containers as an alternative solution. Containers let you run multiple services on one computer, giving each service its own separate environment. They also keep the services separate from each other, just like virtual machines (VMs), but without using as many resources.
 

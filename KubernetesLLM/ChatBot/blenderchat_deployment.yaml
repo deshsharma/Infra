@@ -35,5 +35,5 @@ spec:
       volumes:
       - name: huggingface-cache
         hostPath:
-          path: /tmp/huggingface
+          path: /huggingface
           type: Directory
