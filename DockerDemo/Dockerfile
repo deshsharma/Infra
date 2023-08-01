@@ -14,6 +14,6 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Run the code
-CMD [ "python", "script.py" ]
+#CMD [ "python", "script.py" ]
 #docker build -t my-app .
 #docker run my-app

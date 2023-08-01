@@ -24,7 +24,7 @@ Now, let's consider a family living in individual rooms with separate spaces and
 - Changes or updates to one service have minimal impact on others, like family members having their autonomy within their individual spaces.
 - Debugging and troubleshooting are easier in microservices architecture, as issues can be isolated to specific services, similar to resolving matters within individual rooms.
 
-Microservices use synchronous **(RESTful, HTTP)** and asynchronous (Message Queue) protocols to communicate. They provide flexibility in programming languages and expose RESTful APIs for interaction. Monolithic Architecture scales by increasing the resources of the entire application **(vertical scaling)**, while Microservices Architecture scales by adding more instances of individual services based on demand **(horizontal scaling).**
+Microservices use synchronous **(RESTful, HTTP)** and asynchronous (Message Queue) protocols to communicate. They provide **flexibility in programming languages** and expose RESTful APIs for interaction. Monolithic Architecture scales by increasing the resources of the entire application **(vertical scaling)**, while Microservices Architecture scales by adding more instances of individual services based on demand **(horizontal scaling).**
 
 ![](./images/scaling.png)
 
@@ -152,8 +152,10 @@ Docker images are like recipes for making different types of pizzas. Each image 
 
 ![](./images/dockerimgvscontsiner.png)
 
-Container images are built using a layered approach, where each layer represents a specific component or change in the image. These layers can be shared and reused across multiple images, resulting in more efficient use of storage and network resources. When running a container image, if some of its layers are already present on the local system from a previous image, only the missing layers need to be downloaded. This minimizes the amount of data that needs to be transferred, speeds up image pulls, and reduces disk space usage by avoiding duplicate layers.
-
+Container images are built using a layered approach, where each layer represents a specific component or change in the image. These layers can be shared and reused across multiple images, resulting in more efficient use of storage and network resources. When running a container image, if some of its layers are already present on the local system from a previous image, only the missing layers need to be downloaded. **This minimizes the amount of data that needs to be transferred, speeds up image pulls, and reduces disk space usage by avoiding duplicate layers**.
+![](./images/vmfilesys.png)
+![](./images/Overlayfs.png)
+![](./images/cow.png)
 You can use Docker Engine, Docker Desktop, or open-source alternatives like Podman. Each of these options provides containerization capabilities and allows you to build, run, and manage containers.
 
 **Hands-on**
