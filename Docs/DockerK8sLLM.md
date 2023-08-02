@@ -323,38 +323,38 @@ Kubernetes is a special software system that helps you effortlessly install and 
 Kubernetes key aspects and its benefits.
 
 1. **Simplified Deployment and Management:**
-  - Kubernetes allows you to deploy and manage containerized applications easily.
-  - You don't need to have detailed knowledge of the internal workings of each application.
-  - Manual deployment on each host is eliminated, as Kubernetes handles the deployment process.
+    - Kubernetes allows you to deploy and manage containerized applications easily.
+    - You don't need to have detailed knowledge of the internal workings of each application.
+    - Manual deployment on each host is eliminated, as Kubernetes handles the deployment process.
 2. **Isolation and Compatibility:**
-  - Applications running in containers on Kubernetes are isolated from one another.
-  - This isolation ensures that different applications running on the same server do not interfere with each other.
-  - Cloud providers greatly benefit from this isolation, as they can host applications from multiple organizations on the same hardware, while maintaining complete application separation.
+    - Applications running in containers on Kubernetes are isolated from one another.
+    - This isolation ensures that different applications running on the same server do not interfere with each other.
+    - Cloud providers greatly benefit from this isolation, as they can host applications from multiple organizations on the same hardware, while maintaining complete application separation.
 3. **Abstracting the Infrastructure:**
-  - Kubernetes abstracts the underlying infrastructure, allowing you to run applications on thousands of computer nodes as if they were a single, cohesive system.
-  - This abstraction simplifies development, deployment, and management for both development and operations teams.
-  - Regardless of the cluster size, deploying applications through Kubernetes remains consistent and straightforward.
+    - Kubernetes abstracts the underlying infrastructure, allowing you to run applications on thousands of computer nodes as if they were a single, cohesive system.
+    - This abstraction simplifies development, deployment, and management for both development and operations teams.
+    - Regardless of the cluster size, deploying applications through Kubernetes remains consistent and straightforward.
 4. **Scalability and Resource Utilization:**
-  - Kubernetes enables scaling applications across the cluster, providing access to additional resources for deployed apps.
-  - The size of the cluster does not affect the deployment process, whether it's a small cluster or a large one, the deployment mechanism remains the same.
+    - Kubernetes enables scaling applications across the cluster, providing access to additional resources for deployed apps.
+    - The size of the cluster does not affect the deployment process, whether it's a small cluster or a large one, the deployment mechanism remains the same.
 5. **Development and Operations Alignment:**
-  - Kubernetes bridges the gap between development and operations teams by providing a unified platform for both.
-  - It simplifies development and management processes, making it easier for both teams to collaborate effectively.
+    - Kubernetes bridges the gap between development and operations teams by providing a unified platform for both.
+    - It simplifies development and management processes, making it easier for both teams to collaborate effectively.
 
 **Kubernetes Architecture**
 
 A Kubernetes cluster is made up of multiple nodes, which can be divided into two main types:
 
-1. Master Node:
-  - The master node is responsible for managing and controlling the entire Kubernetes cluster.
-  - It hosts the Kubernetes Control Plane, which includes various components that oversee the cluster's operations.
-  - The Control Plane components include the API server, scheduler, controller manager, and etcd (a distributed key-value store for cluster state).
-  - The master node receives instructions, schedules and orchestrates workloads, and ensures the desired state of the cluster.
-2. Worker Nodes:
-  - Worker nodes are where the actual applications and workloads are deployed and executed within the cluster.
-  - Each worker node runs a container runtime (e.g., Docker, containerd) to manage and run containers.
-  - Worker nodes communicate with the master node and follow its instructions to deploy and manage workloads.
-  - The worker nodes report the status of their resources and running containers back to the master node.
+1. **Master Node**:
+    - The master node is responsible for managing and controlling the entire Kubernetes cluster.
+    - It hosts the Kubernetes Control Plane, which includes various components that oversee the cluster's operations.
+    - The **Control Plane components** include the API server, scheduler, controller manager, and etcd (a distributed key-value store for cluster state).
+    - The master node receives instructions, schedules and orchestrates workloads, and ensures the desired state of the cluster.
+2. **Worker Nodes**:
+    - Worker nodes are where the actual applications and workloads are deployed and executed within the cluster.
+    - Each worker node runs a container runtime (e.g., Docker, containerd) to manage and run containers.
+    - Worker nodes communicate with the master node and follow its instructions to deploy and manage workloads.
+    - The worker nodes report the status of their resources and running containers back to the master node.
 
 Overall, the master node acts as the brain of the Kubernetes cluster, overseeing the cluster's operations, while the worker nodes execute the actual workloads and applications. The master node manages and delegates tasks to the worker nodes, ensuring that the desired state of the cluster is maintained, and applications are running as intended.
 
@@ -364,32 +364,32 @@ Overall, the master node acts as the brain of the Kubernetes cluster, overseeing
 
 The Control Plane is the core of a Kubernetes cluster, responsible for managing and controlling the cluster's operations. It consists of several components that work together to ensure the cluster functions properly. These components can be hosted on a single master node or distributed across multiple nodes for high availability. The key Control Plane components include:
 
-1. Kubernetes API Server:
-  - The API Server acts as the communication hub for all components in the Control Plane.
-  - It receives requests from users, other Control Plane components, and external systems, providing a unified interface to interact with the cluster.
-2. Scheduler:
-  - The Scheduler assigns worker nodes to deployable components of applications based on resource availability and constraints.
-  - It ensures optimal distribution and utilization of resources across the cluster.
-3. Controller Manager:
-  - The Controller Manager performs various cluster-level functions, such as replication, managing node failures, monitoring health, and maintaining desired state.
-  - It ensures that the cluster is operating as expected and takes actions to reconcile any deviations from the desired state.
-4. etcd:
-  - etcd is a distributed and reliable data store that persists the cluster configuration and state.
-  - It acts as the source of truth for the cluster, holding important information such as resource allocation, component states, and configuration data.
+1. **Kubernetes API Server**:
+    - The API Server acts as the communication hub for all components in the Control Plane.
+    - It receives requests from users, other Control Plane components, and external systems, providing a unified interface to interact with the cluster.
+2. **Scheduler**:
+    - The Scheduler assigns worker nodes to deployable components of applications based on resource availability and constraints.
+    - It ensures optimal distribution and utilization of resources across the cluster.
+3. **Controller Manager**:
+    - The Controller Manager performs various cluster-level functions, such as replication, managing node failures, monitoring health, and maintaining desired state.
+    - It ensures that the cluster is operating as expected and takes actions to reconcile any deviations from the desired state.
+4. **etcd**:
+    - etcd is a distributed and reliable data store that persists the cluster configuration and state.
+    - It acts as the source of truth for the cluster, holding important information such as resource allocation, component states, and configuration data.
 
 The Control Plane components are responsible for managing and controlling the state of the cluster, but they don't directly run your applications. The actual execution of containerized applications happens on the worker nodes.
 
-Worker nodes are the machines where your containerized applications run. They consist of the following key components:
+**Worker nodes** are the machines where your containerized applications run. They consist of the following key components:
 
-1. Container Runtime (e.g., Docker, rkt):
-  - The container runtime is responsible for running and managing containers on the worker node.
-  - It provides an environment for executing and isolating applications within containers.
-2. Kubelet:
-  - The Kubelet is an agent that runs on each worker node and communicates with the API Server.
-  - It manages containers on its node, ensuring they are in the desired state and responding to instructions from the Control Plane.
-3. Kubernetes Service Proxy (kube-proxy):
-  - kube-proxy is responsible for load balancing network traffic between application components within the cluster.
-  - It routes and balances requests, allowing efficient communication between application components.
+1. **Container Runtime** (e.g., Docker, rkt):
+    - The container runtime is responsible for running and managing containers on the worker node.
+    - It provides an environment for executing and isolating applications within containers.
+2. **Kubelet**:
+    - The Kubelet is an agent that runs on each worker node and communicates with the API Server.
+    - It manages containers on its node, ensuring they are in the desired state and responding to instructions from the Control Plane.
+3. **Kubernetes Service Proxy** (kube-proxy):
+    - kube-proxy is responsible for load balancing network traffic between application components within the cluster.
+    - It routes and balances requests, allowing efficient communication between application components.
 
 Together, these components on the worker nodes handle the execution, monitoring, and service provision for your containerized applications, while the Control Plane components manage and control the overall state and operations of the cluster.
 
@@ -397,24 +397,24 @@ Together, these components on the worker nodes handle the execution, monitoring,
 
 **Addons in Kubernetes** are optional components or functionalities that can be added to enhance the cluster's capabilities. Two common addons are DNS (Domain Name System) and CNI (Container Networking Interface). Here's a brief explanation of each:
 
-1. DNS Addon:
-  - The DNS addon in Kubernetes provides a built-in DNS service for the cluster.
-  - It allows you to use custom domain names to access services within the cluster.
-  - With the DNS addon, you can use service names instead of IP addresses when communicating between different services in the cluster.
+1. **DNS Addon**:
+    - The DNS addon in Kubernetes provides a built-in DNS service for the cluster.
+    - It allows you to use custom domain names to access services within the cluster.
+    - With the DNS addon, you can use service names instead of IP addresses when communicating between different services in the cluster.
   - It simplifies service discovery and enables communication between applications using human-readable names.
-2. CNI Addon:
-  - The CNI addon in Kubernetes is responsible for container networking.
-  - It defines how containers within the cluster are connected to the network and how they communicate with each other.
-  - CNI enables the creation of virtual networks, IP management, routing, and network policies within the cluster.
-  - It provides a pluggable interface for integrating different networking solutions into the Kubernetes environment, allowing flexibility in choosing the most suitable network plugin for your cluster.
+2. **CNI Addon**:
+    - The CNI addon in Kubernetes is responsible for container networking.
+    - It defines how containers within the cluster are connected to the network and how they communicate with each other.
+    - CNI enables the creation of virtual networks, IP management, routing, and network policies within the cluster.
+    - It provides a pluggable interface for integrating different networking solutions into the Kubernetes environment, allowing flexibility in choosing the most suitable network plugin for your cluster.
 
 Other common addons and functionalities in Kubernetes include:
 
-- Ingress Controllers: Ingress controllers handle incoming network traffic into the cluster and route it to the appropriate services based on rules and configurations. They enable external access to services within the cluster.
-- Metrics Server: The Metrics Server collects resource utilization data, such as CPU and memory usage, from pods and nodes in the cluster. It enables monitoring and scaling based on resource metrics.
-- Dashboard: The Kubernetes Dashboard is a web-based user interface for managing and monitoring the cluster. It provides a graphical view of resources, allows visual deployment and scaling of applications, and offers access to logs and metrics.
-- Logging and Monitoring: Various logging and monitoring addons, such as Prometheus and Fluentd, can be integrated into Kubernetes to collect logs and metrics from pods and nodes. They help in tracking application performance, identifying issues, and gaining insights into the cluster's health.
-- Storage Provisioner: Storage provisioners enable dynamic provisioning and management of persistent volumes for applications within the cluster. They integrate with storage providers to create and manage storage resources.
+- **Ingress Controllers**: Ingress controllers handle incoming network traffic into the cluster and route it to the appropriate services based on rules and configurations. They enable external access to services within the cluster.
+- **Metrics Server**: The Metrics Server collects resource utilization data, such as CPU and memory usage, from pods and nodes in the cluster. It enables monitoring and scaling based on resource metrics.
+- **Dashboard**: The Kubernetes Dashboard is a web-based user interface for managing and monitoring the cluster. It provides a graphical view of resources, allows visual deployment and scaling of applications, and offers access to logs and metrics.
+- **Logging and Monitoring**: Various logging and monitoring addons, such as Prometheus and Fluentd, can be integrated into Kubernetes to collect logs and metrics from pods and nodes. They help in tracking application performance, identifying issues, and gaining insights into the cluster's health.
+- **Storage Provisioner**: Storage provisioners enable dynamic provisioning and management of persistent volumes for applications within the cluster. They integrate with storage providers to create and manage storage resources.
 
 These addons and functionalities can be added to a Kubernetes cluster based on specific requirements and use cases. They extend the capabilities of the cluster, providing additional features for networking, service discovery, monitoring, logging, storage, and user interfaces.
 
@@ -427,67 +427,97 @@ In this demo, a user-friendly tool that allows you to set up a complete Kubernet
 Minikube office site. [https://minikube.sigs.k8s.io/docs/start/](https://minikube.sigs.k8s.io/docs/start/)
 
 - Start minikube:
-```
-
+```ssh
 ➜ minikube start
-
 😄 minikube v1.30.1 on Darwin 13.4.1 (arm64)
-
 ✨ Automatically selected the docker driver. Other choices: qemu2, ssh
-
 📌 Using Docker Desktop driver with root privileges
-
 👍 Starting control plane node minikube in cluster minikube
-
 🚜 Pulling base image ...
-
 💾 Downloading Kubernetes v1.26.3 preload ...
-
 \> preloaded-images-k8s-v18-v1...: 330.52 MiB / 330.52 MiB 100.00% 8.12 Mi
-
 \> gcr.io/k8s-minikube/kicbase...: 336.39 MiB / 336.39 MiB 100.00% 6.75 Mi
-
 🔥 Creating docker container (CPUs=2, Memory=8100MB) ...
-
 🐳 Preparing Kubernetes v1.26.3 on Docker 23.0.2 ...
-
 ▪ Generating certificates and keys ...
-
 ▪ Booting up control plane ...
-
 ▪ Configuring RBAC rules ...
-
 🔗 Configuring bridge CNI (Container Networking Interface) ...
-
 ▪ Using image gcr.io/k8s-minikube/storage-provisioner:v5
-
 🔎 Verifying Kubernetes components...
-
 🌟 Enabled addons: default-storageclass, storage-provisioner
-
 🏄 Done! kubectl is now configured to use "minikube" cluster and "default" namespace by default
 ```
-1. **minikube start** : Start a local Kubernetes ![](RackMultipart20230718-1-yraz1x_html_eaa69b48d2779248.png) cluster using Minikube.
-2. **minikube stop** : Stop the currently running Minikube cluster.
-3. **minikube delete** : Delete the Minikube cluster.
-4. **minikube status** : Check the status of the Minikube cluster.
-5. **minikube dashboard** : Open the Kubernetes dashboard for the Minikube cluster.
-6. **minikube addons list** : List the available addons that can be enabled in Minikube.
-7. **minikube addons enable \<addon-name\>** : Enable a specific addon in Minikube.
-8. **minikube addons disable \<addon-name\>** : Disable a specific addon in Minikube.
-9. **minikube service \<service-name\>** : Open the specified service in a web browser.
-10. **minikube ip** : Get the IP address of the Minikube cluster.
-11. **minikube ssh** : SSH into the Minikube node to access its filesystem and execute commands.
-12. **minikube logs** : Print the logs of the Minikube cluster.
-13. **minikube config set** : Set a configuration value for Minikube.
+1. Start a local Kubernetes cluster using Minikube.
+    ```sh 
+    minikube start
+    ```
+2. Stop the currently running Minikube cluster.
+    ```sh 
+    minikube stop
+    ```
+3. Delete the Minikube cluster.
+    ```sh
+    minikube delete
+    ```
+4. Check the status of the Minikube cluster.
+    ```sh
+    minikube status
+    ```
+5. Open the Kubernetes dashboard for the Minikube cluster.
+   ```sh
+    minikube dashboard
+   ```
+6. List the available addons that can be enabled in Minikube.
+   ```sh
+    minikube addons list
+   ```
+7. Enable a specific addon in Minikube.
+    ```sh
+    minikube addons enable <addon-name>
+    ```
+8. Disable a specific addon in Minikube.
+   ```sh
+   minikube addons disable <addon-name>
+   ```
+9. Open the specified service in a web browser.
+   ```sh
+   minikube service <service-name>
+   ```
+10. Get the IP address of the Minikube cluster.
+    ```sh
+    minikube ip
+    ```
+11. SSH into the Minikube node to access its filesystem and execute commands.
+    ```sh
+    minikube ssh
+    ```
+12. Print the logs of the Minikube cluster.
+    ```sh
+    minikube logs
+    ```
+13. Set a configuration value for Minikube.
+    ```sh
+    minikube config set
+    minikube config set memory 8192
+    minikube config set cpu 4
+    ```
 
-minikube config set memory 8192
 
-minikube config set cpu 4
 
-1. **minikube config view** : View the current configuration settings for Minikube.
-2. **eval $(minikube docker-env)**
-3. **minikube mount huggingface:/huggingface**
+13. View the current configuration settings for Minikube.
+    ```sh
+    minikube config view
+    ```
+14. Access minikube images and filesystem.
+    ```sh
+    eval $(minikube docker-env)
+    minikube ssh
+    ```
+15. Mounting system files.
+    ```sh
+    minikube mount huggingface:/huggingface
+    ```
 
 You will also need kubectl, which is the command-line tool that we will use to interact with kubernetes. You can use the one found in minikube. It is possible to run it as "minikube kubectl".
 
