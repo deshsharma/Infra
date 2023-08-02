@@ -1,5 +1,4 @@
 FROM alpine
-
 CMD ["ls" , "-l"]
 #docker build -t dockercmd -f DockerfileCmd .
 #docker run dockercmd

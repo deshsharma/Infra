@@ -1,4 +1,4 @@
-**Monolithic vs Microservice Architecture**
+## Monolithic vs Microservice Architecture
 
 ![](./images/monolithicvsmini.png)
 
@@ -16,6 +16,8 @@ Imagine a family living in a single room where everyone shares the same space an
 
 Now, let's consider a family living in individual rooms with separate spaces and resources. Each family member has their own room, allowing them privacy and independence. They can choose when to interact and collaborate with other family members.
 
+
+
 **Microservices Architecture Comparison:**
 
 - In microservices architecture, the application is divided into small, independent services, similar to family members living in separate rooms.
@@ -28,7 +30,7 @@ Microservices use synchronous **(RESTful, HTTP)** and asynchronous (Message Queu
 
 ![](./images/scaling.png)
 
-A monolithic program runs on a single server, like a big house where everything is in one place. On the other hand, microservices applications work better in the cloud, which is like having different houses for different tasks. While microservices can run on a single server, developers usually choose to use cloud service providers to benefit from scalability, fault tolerance, and high availability. Before you can start using microservices, you need to set up the right tools and workflow. It requires more effort compared to monolithic programs, but it's worth it when building large and scalable applications.
+A monolithic program mostly runs on a single server, like a big house where everything is in one place. On the other hand, microservices applications work better in the cloud, which is like having different houses for different tasks. While microservices can run on a single server, developers usually choose to use cloud service providers to benefit from scalability, fault tolerance, and high availability. Before you can start using microservices, you need to set up the right tools and workflow. It requires more effort compared to monolithic programs, but it's worth it when building large and scalable applications.
 
 **Microservices**
 
@@ -72,11 +74,11 @@ Things are going well, but now consider that the components have become **smalle
 
 When faced with the challenges of managing numerous components without squandering hardware and human resources, people often turn to containers as an alternative solution. Containers let you run multiple services on one computer, giving each service its own separate environment. They also keep the services separate from each other, just like virtual machines (VMs), but without using as many resources.
 
-**VM vs Container (Virtualization)**
+## VM vs Container (Virtualization)
 
 ![](./images/vm_vs_containers.png)
 
-Virtual Machines (VMs):
+**Virtual Machines (VMs)**:
 
 - Include the **guest operating system (OS)** and all application code and dependencies.
 - VM images are typically larger in size, measured in **gigabytes**.
@@ -84,7 +86,7 @@ Virtual Machines (VMs):
 - VMs abstract servers from the underlying hardware and persist throughout their useful life.
 - Suitable for **long-running applications** and workloads that require full isolation and multiple operating systems.
 
-Containers:
+**Containers**:
 
 - Share the **host OS** and include only the applications and their dependencies.
 - Container images are generally smaller in size, measured in **megabytes**.
@@ -93,19 +95,19 @@ Containers:
 - Ideal for **microservices architecture** , scaling applications, and enabling rapid deployment and scalability.
 - Since the underlying OS is shared, containers might not be as **safe** as virtual machines.
 
-**Secret of multiple Containers**
 
-**Namespace and Cgroups**
+**Secret of multiple Containers**
 
 ![](./images/cgroups.png)
 
 In a Linux system, there is a default **namespace** that includes all the system resources, like file systems, process IDs, user IDs, and network interfaces. This namespace is like a big container that holds everything together.Think of namespaces as separate rooms in a house. By default, you have one big room that contains everything. But with namespaces, you can create multiple rooms and organize things differently in each room.
+**Namespaces** provide isolation of system resources, such as PIDs, network interfaces, and filesystems. This means that containers running in different namespaces cannot see or interact with each other's resources.
 
-The different kinds of namespaces are:
+Here are some examples of namespaces:
 
-1. Mount (mnt): This namespace allows you to have different sets of file systems mounted in different namespaces. It's like having different storage spaces in different rooms of the house.
-2. Process ID (pid): This namespace provides separate process ID spaces for each namespace. Each room (namespace) has its own set of process IDs, so processes running in one room can't see or interfere with processes running in another room.
-3. Network (net): This namespace gives you separate network interfaces for each namespace. It's like having separate sets of Wi-Fi routers in each room, so devices connected to one router can't directly communicate with devices connected to another router.
+- **Process ID (pid)**: This namespace provides separate process ID spaces for each namespace. Each room (namespace) has its own set of process IDs, so processes running in one room can't see or interfere with processes running in another room.
+- **Mount (mnt)**: This namespace allows you to have different sets of file systems mounted in different namespaces. It's like having different storage spaces in different rooms of the house.
+- **Network (net)**: This namespace gives you separate network interfaces for each namespace. It's like having separate sets of Wi-Fi routers in each room, so devices connected to one router can't directly communicate with devices connected to another router.
 
 Another important aspect of container isolation is the control over system resource consumption. This control is achieved using **cgroups** , which is a feature provided by the Linux kernel. **Cgroups** allow you to set limits on how much system resources a process or a group of processes within a container can utilize. These resources can include CPU usage, memory allocation, network bandwidth, and more.
 
@@ -120,7 +122,15 @@ Cgroups, a Linux kernel feature, are like rules that allow you to limit the cons
   - Resource Allocation: Cgroups set memory limits for processes within containers, preventing one container from excessively using memory and leaving insufficient resources for others.
   - Preventing Overload: With network bandwidth limits enforced by cgroups, containers share network resources fairly, avoiding network congestion caused by a single container using too much bandwidth.
 
-**Docker**
+Here is an analogy that might help to understand namespace and cgroups:
+  - Containers are like rooms in a house.
+  - Processes are like people in the house.
+  - Cgroups are like the rules that you set for each room.
+  - Namespaces are like the walls that separate the rooms.
+
+
+
+## Docker
 
 Docker is a powerful tool that has become closely associated with containers, but it's important to understand that Docker itself is **not a container.** Instead, Docker is a widely used developer tool and container engine that enables the creation, management, and deployment of containers.
 
@@ -128,34 +138,42 @@ Docker components and their roles in Docker.
 
 ![](./images/docker_components.png)
 
-1. Docker Engine: Docker Engine is the core component of Docker that provides the runtime environment for containers. When we install Docker on our system, we are essentially installing Docker Engine. Docker Engine consists of three main parts:
-  - Docker Client (docker CLI): The Docker Client is the command-line interface that allows users to interact with Docker. It sends commands and requests to the Docker Daemon (dockerd) for various container, network, image, and volume operations.
-  - Docker Daemon (dockerd): The Docker Daemon is the background service that runs on the host machine. It listens for commands from the Docker Client, communicates with various components, and manages the core Docker operations. It exposes a REST API that the Docker Client uses to communicate with it.
-  - REST API: The REST API is the interface through which the Docker Client and Docker Daemon communicate. The Docker Client sends REST API requests to the Docker Daemon, specifying the desired actions, such as creating a container or managing network settings.
+ **Docker Engine**: Docker Engine is the core component of Docker that provides the runtime environment for containers. When we install Docker on our system, we are essentially installing Docker Engine. Docker Engine consists of three main parts:
+  - **Docker Client (docker CLI)**: The Docker Client is the command-line interface that allows users to interact with Docker. It sends commands and requests to the Docker Daemon (dockerd) for various container, network, image, and volume operations.
+  - **Docker Daemon (dockerd)**: The Docker Daemon is the background service that runs on the host machine. It listens for commands from the Docker Client, communicates with various components, and manages the core Docker operations. It exposes a REST API that the Docker Client uses to communicate with it.
+  - **REST API**: The REST API is the interface through which the Docker Client and Docker Daemon communicate. The Docker Client sends REST API requests to the Docker Daemon, specifying the desired actions, such as creating a container or managing network settings.
 
-1. Containerd and runc: While containerd is an important component in the Docker ecosystem, it is not directly responsible for creating or running containers. Instead, it acts as a container runtime that **manages the lifecycle of containers**. It interacts with the underlying operating system and leverages tools like **runc** for **container creation and execution.**![](./images/docker%20runtime.png)
+ **Containerd and runc**: While containerd is an important component in the Docker ecosystem, it is not directly responsible for creating or running containers. Instead, it acts as a container runtime that **manages the lifecycle of containers**. It interacts with the underlying operating system and leverages tools like **runc** for **container creation and execution.**![](./images/docker%20runtime.png)
   - runc: runc is a lightweight command-line tool that serves as the container runtime for Docker. It is responsible for creating and running containers based on container specifications, such as the OCI (Open Container Initiative) runtime specification. runc interacts with the host OS to provide the necessary isolation and resource management for containers.
-
-**Storage and Volume**
-
-Container runtimes, such as Docker, provide the ability to store data within containers. When a container is stopped and then run again, the data stored within the container will persist. However, if the container is destroyed (removed), the data stored within it will also be destroyed.To achieve persistent data storage that survives container destruction, you can utilize host volumes. Host volumes allow you to mount directories or files from the host machine into the container, providing a way to store and access data that is independent of the container's lifecycle. The overlay2 driver is one of the available options for managing container filesystems and storage within Docker. It is a storage driver that utilizes the OverlayFS file system, which allows for efficient layered filesystems and copy-on-write operations.
-
-
+You can **run containers using runc**, but it is not as easy as using Docker or Podman. Runc is a low-level container runtime, while Docker and Podman are higher-level container management tools that provide a more user-friendly experience.
 
 **Three main concepts in Docker**
 
-- Images: Docker container images package applications and their environment, containing the filesystem and metadata. They can be run locally or stored in registries for sharing.
-- Registries: Docker Registries store and share Docker images, allowing easy access and distribution across different computers. Public and private registries are available.
-- Containers: Docker containers are isolated Linux processes created from Docker images. They run as separate processes, isolated from the host and other containers, with resource constraints allocated to them.
+- **Images**: Docker container images package applications and their environment, containing the filesystem and metadata. They can be run locally or stored in registries for sharing.
+- **Registries**: Docker Registries store and share Docker images, allowing easy access and distribution across different computers. Public and private registries are available.
+- **Containers**: Docker containers are isolated Linux processes created from Docker images. They run as separate processes, isolated from the host and other containers, with resource constraints allocated to them.
 
 Docker images are like recipes for making different types of pizzas. Each image provides instructions and ingredients to create a specific pizza. Containers, on the other hand, are like individual servings of those pizzas. Once you follow the recipe (image) and create a pizza (container), you have a self-contained portion that you can enjoy, separate from other pizzas.
 
 ![](./images/dockerimgvscontsiner.png)
+**Storage and Volume**
+
+Container runtimes, such as Docker, provide the ability to store data within containers. When a container is stopped and then run again, the data stored within the container will persist. However, if the container is destroyed (removed), the data stored within it will also be destroyed.To achieve persistent data storage that survives container destruction, you can utilize host volumes. Host volumes allow you to mount directories or files from the host machine into the container, providing a way to store and access data that is independent of the container's lifecycle. The overlay2 driver is one of the available options for managing container filesystems and storage within Docker. It is a storage driver that utilizes the OverlayFS file system, which allows for efficient layered filesystems and copy-on-write operations.
 
 Container images are built using a layered approach, where each layer represents a specific component or change in the image. These layers can be shared and reused across multiple images, resulting in more efficient use of storage and network resources. When running a container image, if some of its layers are already present on the local system from a previous image, only the missing layers need to be downloaded. **This minimizes the amount of data that needs to be transferred, speeds up image pulls, and reduces disk space usage by avoiding duplicate layers**.
-![](./images/vmfilesys.png)
+![](./images/dockertransfer.png)
+When you transfer a VM, you are transferring the entire virtual machine image, including the operating system, applications, and data. This means that if you make changes to the application or data on one VM, you will need to make the same changes on all of the other VMs that are using the same image.  example, the image is 350MB in size, and the application is 50MB. If you make a change to the application that is 1MB in size, you will need to create a new image that is 351MB in size. This is because the change to the application is not isolated from the rest of the image.
+The container is 350MB in size, and the change to the application is 1MB in size. This means that you only need to transfer 1MB of data, instead of 350MB of data. This will make the transfer much faster.
+The ability to pull only the changes that have been made to a container is due to Docker **Overlay filesystem**.
 ![](./images/Overlayfs.png)
+ Overlay filesystem is a type of filesystem that allows multiple layers to be stacked on top of each other. This allows containers to be layered, and each layer to contain the changes that have been made to the container since it was created.
+ 
+ When you run a VM, the entire image is cloned and the clone is run. This can take a long time, especially if the image is large. When you run a container, the image is mounted as read-only. This means that the image is not cloned, and the container only has access to the read-only version of the image. This makes it much faster to start a container than to start a VM.
 ![](./images/cow.png)
+
+If you need to make changes to a container, you can use the **copy on write (COW)** feature. COW allows you to make changes to a container without having to clone the image. This is done by creating a new layer on top of the read-only image. The new layer is read-write, so you can make changes to it. When you stop the container, the changes are saved to the new layer.
+
+This makes it very easy to make changes to containers. You can make changes to a container without having to start over from scratch. This is a major advantage of using containers over VMs.
 You can use Docker Engine, Docker Desktop, or open-source alternatives like Podman. Each of these options provides containerization capabilities and allows you to build, run, and manage containers.
 
 **Hands-on**
@@ -163,58 +181,133 @@ You can use Docker Engine, Docker Desktop, or open-source alternatives like Podm
 Let's jump into demo:
 
 1. Image Management:
-  - Pulling Docker images from a registry using **docker pull**.
-  - Listing downloaded images with **docker images**.
-  - Removing unused images with **docker rmi**.
-  - Building custom images from a Dockerfile with **docker build**.
+  - The default Docker registry is Docker Hub. Docker Hub is a public registry that hosts millions of Docker images. You can pull images from Docker Hub by using the docker pull command.
+    ```sh
+    docker pull
+    ```
+  - Listing downloaded images with 
+    ```sh
+    docker images
+    ```
+  - Removing unused images with 
+   
+    ```sh 
+    docker rmi
+    ```
+  - Building custom images from a Dockerfile with 
+    ```sh
+    docker build
+    ```
 2. Pulling and Running a Container:
-  - Command-line: **docker pull \<image\_name\>** and **docker run \<image\_name\>**
-  - Example: Pull and run the official Nginx web server image: **docker pull nginx** and **docker run --name nigxserver -d -p 8080:80 nginx**
-  - Note: Specify container ports ( **-p** ) to map container ports to host ports for accessing services.
+   ```sh
+   docker pull <image_name> 
+   docker run <image_name>
+    ``` 
+  - Example: Pull and run the official Nginx web server image: 
+    ```sh
+    docker pull nginx 
+    docker run --name nigxserver -d -p 8080:80 nginx
+    ```
+    Note: Specify container ports ( **-p** ) to map container ports to host ports for accessing services.
 
-CMD provides default parameters that can be overridden, while ENTRYPOINT sets default parameters that cannot be overridden when running Docker containers with CLI parameters.
+    CMD and ENTRYPOINT are both instructions in a Dockerfile that define the command that will be run when a container is started. However, there are some key differences between the two instructions.
 
-1. Building a Custom Image:
-  - Command-line: **docker build -t \<image\_name\> \<path\_to\_Dockerfile\>**
-  - Example: Build a custom Docker image for a Node.js application: **docker build -t myapp .**
+    CMD provides default parameters that can be overridden, while ENTRYPOINT sets default parameters that cannot be overridden when running Docker containers with CLI parameters.
+    ```sh
+    cat DockerfileCmd
+    FROM alpine
+    CMD ["ls" , "-l"]
+    #docker build -t dockercmd -f DockerfileCmd .
+    #docker run dockercmd
+    #docker run dockercmd ls var
+    #docker run -it dockercmd  /bin/sh
+     ```
+    ```sh
+    cat DockerfileEntryPoint
+    FROM alpine
+    ENTRYPOINT [ "ls" ]
+    #docker build -t dockerep -f DockerfileEntryPoint .
+    #docker run dockerep
+    #docker run dockerep ls var 
+    #You cannot overwrite ls: ls: No such file or directory
+    #docker run -it --entrypoint /bin/sh dockerep
+    ```
+
+3. Building a Custom Image:
+    ```sh
+    docker build -t <image_name> <path_to_Dockerfile>
+    ```
   - **Note:** Use **.dockerignore** file to exclude unnecessary files and directories from the build context.
 
-1. Container Networking:
+4. Container Networking:
 
-• Command-line: docker network create \<network\_name\>, docker run --network \<network\_name\> ...
+    ```sh
+    docker network create <network_name>
+    docker run --network <network_name>
+    ``` 
 
-• Example: Create a custom network and run containers on that network:
-**docker network create network1**
+    Example: Create a custom network and run containers on that network:
 
-**docker network create network2**
+    ```sh
+    docker network create network1
+    docker network create network2
+    docker network ls
+    docker run --rm -it --network network2 --name container2 alpine:latest sh
+    docker run --rm -it --network network1 --name container1 alpine:latest sh
+    ```
 
-**docker network ls**
+  
+    Docker host networking is a networking mode in which a Docker container shares its network namespace with the host machine. When you run a container in host networking mode, the container directly uses the network stack of the host system, effectively bypassing Docker's network isolation.
+    ```sh
+    docker run -it --network host --name nginxhost nginx
+    ```
 
-**docker run --rm -it --network network2 --name container2 alpine:latest sh**
-
-**docker run --rm -it --network network1 --name container1 alpine:latest sh**
-
-**docker run -it --network host --name nginxhost nginx**
- Docker host networking is a networking mode in which a Docker container shares its network namespace with the host machine. When you run a container in host networking mode, the container directly uses the network stack of the host system, effectively bypassing Docker's network isolation.
-
-• Best Practice: Use user-defined networks to facilitate communication between containers and manage network isolation.
+   **Best Practice**: Use user-defined networks to facilitate communication between containers and manage network isolation.
 
 1. Volume Management:
-  - Creating and using named volumes with **docker volume create** and **docker run -v**.
-  - **docker volume create demo\_volume** (Named volume)
-  - Mounting host directories as volumes with **docker run -v**. ( **docker run -it -v demo\_volume:/tmp alpine:latest** )
-  - Inspecting volume details with **docker volume inspect**.
-  - Removing unused volumes with **docker volume rm**.
-2. Container Inspection and Troubleshooting:
-  - Inspecting container details with **docker inspect**.
-  - Executing commands inside a running container with **docker exec**.
-  - Accessing a container's shell with **docker exec -it**.
-3. Monitoring resource usage of containers with **docker stats**. Managing Containers:
-  - Command-line: **docker ps** , **docker start \<container\_id\>** , **docker stop \<container\_id\>** , **docker rm \<container\_id\>**
-  - Example: View running containers: **docker ps** , Stop a container: **docker stop \<container\_id\>**
+  - Creating and using named volumes
+    ```sh   
+    docker volume create demo_volume (Named volume)
+    ```
+  - Mounting host directories as volumes
+    ```sh
+    docker run -it -v demo_volume:/tmp alpine:latest
+    ```
+  - Inspecting volume details
+    ```sh
+    docker volume inspect demo_volume
+    ```
+  - Removing unused volumes
+    ```sh
+    docker volume rm demo_volume
+    ```
+6. Container Inspection and Troubleshooting:
+  - Inspecting container details
+    ```sh
+    docker inspect <container_id>
+    ```
+  - Executing commands inside a running container
+    ```sh
+    docker exec  <container_id> <cmd>
+    ````
+  - Accessing a container's shell
+    ```sh
+    docker exec -it  <container_id> /bin/sh
+    ```
+7. Monitoring resource usage of containers with 
+   ```sh 
+   docker stat
+   ```
+8. Managing Containers:
+    ```sh
+    docker ps
+    docker start <container_id> #View running containers
+    docker stop <container_id>
+    docker rm <container_id>
+    ``` 
   - Note: Use meaningful names or tags when running containers for better identification and management.
-
-Use **best practices** such as:
+  
+  Use **best practices** such as:
 
 - Using lightweight base images.
 - Avoiding running containers as root.
@@ -223,7 +316,7 @@ Use **best practices** such as:
 - Mounting volumes for persistent data storage.
 - Securing containerized applications with appropriate access controls and network isolation.
 
-**Kubernetes**
+## Kubernetes
 
 Kubernetes is a special software system that helps you effortlessly install and control applications that are put into containers.It helps the programs work together and stay organized. It makes sure they have enough resources and can talk to each other. Just like a conductor in an orchestra, Kubernetes helps all the programs play their parts smoothly and work well together.
 
